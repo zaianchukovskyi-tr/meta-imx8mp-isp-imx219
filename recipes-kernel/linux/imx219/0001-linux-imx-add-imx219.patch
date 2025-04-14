@@ -9,8 +9,8 @@
  			  imx8mp-evk-iqaudio-dacplus.dtb imx8mp-evk-iqaudio-dacpro.dtb imx8mp-evk-hifiberry-dacplus.dtb \
  			  imx8mp-evk-hifiberry-dac2.dtb imx8mp-evk-hifiberry-dacplusadc.dtb \
  			  imx8mp-evk-usdhc1-m2.dtb imx8mp-evk-rm67199.dtb \
---- linux-imx/arch/arm64/boot/dts/freescale.orig/imx8mp-evk-imx219.dts	1970-01-01 09:00:00.000000000 +0900
-+++ linux-imx/arch/arm64/boot/dts/freescale/imx8mp-evk-imx219.dts	2024-03-22 16:46:39.000000000 +0900
+--- linux-imx/arch/arm64/boot/dts/freescale.orig/imx8mp-hummingboard-pulse-imx219.dts	1970-01-01 09:00:00.000000000 +0900
++++ linux-imx/arch/arm64/boot/dts/freescale/imx8mp-hummingboard-pulse-imx219.dts	2024-03-22 16:46:39.000000000 +0900
 @@ -0,0 +1,98 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
@@ -31,8 +31,8 @@
 +
 +#include "imx8mp-evk.dts"
 +
-+&i2c2 {
-+	/delete-node/ov5640_mipi@3c;
++&i2c3 {
++	/delete-node/basler_camera_vvcam@36;
 +
 +	imx219_0: imx219_mipi@10 {
 +		compatible = "sony,imx219";
@@ -66,10 +66,6 @@
 +	};
 +};
 +
-+&i2c3 {
-+	/delete-node/ov5640_mipi@3c;
-+
-+};
 +
 +&cameradev {
 +	status = "okay";
@@ -97,7 +93,7 @@
 +	status = "okay";
 +
 +	port {
-+		endpoint {
++		mipi_csi0_ep: endpoint {
 +			remote-endpoint = <&imx219_mipi_0_ep>;
 +			data-lanes = <2>;
 +			csis-hs-settle = <16>;
@@ -105,8 +101,6 @@
 +	};
 +};
 +
-+&mipi_csi_1 {
-+	/delete-property/ #address-cells;
-+	/delete-property/ #size-cells;
-+	/delete-node/port@1;
++&mipi_csi_0 {
++	/delete-node/port@0;
 +};
